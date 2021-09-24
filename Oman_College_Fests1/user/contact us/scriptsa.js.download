@@ -1,0 +1,45 @@
+;(function ($, window, document, undefined) {
+    'use strict';
+
+    if($('#toggle-demos').length){
+        $('#toggle-demos').on('click', function () {
+            $('.thb-demo-holder').addClass('active');
+        });
+    }
+
+    if($('.thb-demo-holder svg').length){
+        $('.thb-demo-holder svg').on('click', function () {
+            $('.thb-demo-holder').removeClass('active');
+        });
+    }
+
+
+
+    function getCookie(name) {
+        var matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+    if($('.button-play').length){
+
+        if(getCookie('enable_sound') =='no'){
+            $('.button-play').addClass('stop');
+            $('body').removeClass('enable_sound');
+        }
+
+        $('.button-play').on('click', function () {
+            $('.button-play').toggleClass('stop');
+            $('body').toggleClass('enable_sound');
+            if($('body').hasClass('enable_sound')){
+                document.cookie = "enable_sound=yes";
+            }else{
+                document.cookie = "enable_sound=no";
+            }
+        });
+    }
+
+
+
+})(jQuery, window, document);
